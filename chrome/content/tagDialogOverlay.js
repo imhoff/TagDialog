@@ -38,56 +38,57 @@
  * tagDialogObserver
  */
 var tagDialogObserver = {
-	initialize : function(){
-    var observerService = Components.classes['@mozilla.org/observer-service;1']
-                                    .getService(Components.interfaces.nsIObserverService);
-    observerService.addObserver(tagDialogObserver,'mail:updateToolbarItems',false);
-    window.removeEventListener('load',initializeTagDialog,false);
-	},
-	observe: function( aSubject, aTopic, aData ){
-		try {
-      if ( gDBView.keyForFirstSelectedMessage != nsMsgKey_None ){
-      	document.getElementById('cmd_tagDialog').removeAttribute('disabled');
-      }
-		} catch (e){}
-	}
+    initialize : function(){
+        var observerService = Components.classes['@mozilla.org/observer-service;1']
+                                        .getService(Components.interfaces.nsIObserverService);
+        observerService.addObserver(tagDialogObserver,'mail:updateToolbarItems',false);
+        window.removeEventListener('load',initializeTagDialog,false);
+    },
+    observe: function( aSubject, aTopic, aData ){
+        try {
+            if ( gDBView.keyForFirstSelectedMessage != nsMsgKey_None ){
+                document.getElementById('cmd_tagDialog').removeAttribute('disabled');
+            }
+        } catch (e){}
+    }
 };
 
 function initializeTagDialog(){
-	tagDialogObserver.initialize();
+    tagDialogObserver.initialize();
 }
 function popupTagDialog(){
-	var gDBView = window.gDBView || GetDBView();
-	var msgHdr = gDBView.hdrForFirstSelectedMessage;
-	var uri = getCurrentRootFolderURI();
-	var currentKeys = msgHdr.getStringProperty('keywords');
-	//if ( msgHdr.label ) currentKeys += ' $label' + msgHdr.label;
-	var result = { status: false, existingTags: [], newTagKeys: [] };
-	var dialog = window.openDialog('chrome://tagdialog/content/tagDialog.xul',
-	                               'TagDialog',
-	                               'chrome,titlebar,modal,resizable,centerscreen',
-	                               currentKeys, result, uri);
-  if ( result.status ){
-  	RemoveAllMessageTags();
-  	for ( var i=0; i<result.existingTags.length; i++ ){
-    	ToggleMessageTag(result.existingTags[i].key, true);
-  	}
-  	for ( var i=0; i<result.newTagKeys.length; i++ ){
-    	ToggleMessageTag(result.newTagKeys[i], true);
-  	}
-	}
+    var gDBView = window.gDBView || GetDBView();
+    var msgHdr = gDBView.hdrForFirstSelectedMessage;
+    var uri = getCurrentRootFolderURI();
+    var currentKeys = msgHdr.getStringProperty('keywords');
+    //if ( msgHdr.label ) currentKeys += ' $label' + msgHdr.label;
+    var result = { status: false, existingTags: [], newTagKeys: [] };
+    var dialog = window.openDialog('chrome://tagdialog/content/tagDialog.xul',
+                                   'TagDialog',
+                                   'chrome,titlebar,modal,resizable,centerscreen',
+                                   currentKeys, result, uri);
+    if ( result.status ){
+        RemoveAllMessageTags();
+        for ( var i=0; i<result.existingTags.length; i++ ){
+            ToggleMessageTag(result.existingTags[i].key, true);
+        }
+        for ( var i=0; i<result.newTagKeys.length; i++ ){
+            ToggleMessageTag(result.newTagKeys[i], true);
+        }
+    }
 }
 function getCurrentRootFolderURI(){
-	var gDBView = window.gDBView || GetDBView();
-	var uri = null;
-	try {
-		var rootFolder = gDBView.msgFolder.server.rootFolder;
-		if (rootFolder.isServer && rootFolder.server.canHaveFilters){
-			uri = (rootFolder.server.type == 'nntp') ? gDBView.msgFolder.URI : rootFolder.URI;
-		}
-	} catch (ex){
-		Components.utils.reportError(ex);
-	}
-	return uri;
+    var gDBView = window.gDBView || GetDBView();
+    var uri = null;
+    try {
+        var rootFolder = gDBView.msgFolder.server.rootFolder;
+        if (rootFolder.isServer && rootFolder.server.canHaveFilters){
+            uri = (rootFolder.server.type == 'nntp') ? gDBView.msgFolder.URI : rootFolder.URI;
+        }
+    } catch (ex){
+        Components.utils.reportError(ex);
+    }
+    return uri;
 }
 window.addEventListener('load',initializeTagDialog,false);
+// vim: sw=4 ts=4 et:

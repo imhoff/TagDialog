@@ -16,4 +16,8 @@
   <hbox flex="1">
     <textbox id="tagText"/>
     <colorpicker class="small-margin" id="tagColor" type="button" palettename="standard"/>
-  </hbox></dialog>
+  </hbox>
+</dialog>
+<!--
+vim: sw=2 ts=2 et:
+-->

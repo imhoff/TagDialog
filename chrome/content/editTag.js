@@ -41,30 +41,31 @@
  */
 var args;
 function initialize(){
-	args = window.arguments[0];
-	if ( args.edit ){
-  	var title = document.getElementById("bundle_messenger").getString("editTagTitle");
-  	document.title = title + ' - ' + args.tagName;
-	} else {
-  	document.title += ' - ' + args.tagName;
-	}
-	document.getElementById('tagText').value = args.tagName;
-	document.getElementById('tagColor').color = args.tagColor;
+    args = window.arguments[0];
+    if ( args.edit ){
+        var title = document.getElementById("bundle_messenger").getString("editTagTitle");
+        document.title = title + ' - ' + args.tagName;
+    } else {
+        document.title += ' - ' + args.tagName;
+    }
+    document.getElementById('tagText').value = args.tagName;
+    document.getElementById('tagColor').color = args.tagColor;
 }
 /**
  * onAccept
  * @return {Boolean}
  */
 function onOK(){
-	args.tagName = document.getElementById('tagText').value;
-	args.tagColor = document.getElementById('tagColor').color;
-	args.status = true;
-	return true;
+    args.tagName = document.getElementById('tagText').value;
+    args.tagColor = document.getElementById('tagColor').color;
+    args.status = true;
+    return true;
 }
 /**
  * onCancel
  * @return {Boolean}
  */
 function onCancel(){
-	return true;
+    return true;
 }
+// vim: sw=4 ts=4 et:

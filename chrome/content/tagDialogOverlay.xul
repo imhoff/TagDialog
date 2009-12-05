@@ -5,17 +5,20 @@
          
 <script type="application/x-javascript" src="chrome://tagdialog/content/tagDialogOverlay.js"/> 
 <menupopup id="messageMenuPopup">
-	<menuitem id="tagDialogMenu" label="&title;" insertbefore="tagMenu"
-		key="key_tagDialog" command="cmd_tagDialog"/>
+  <menuitem id="tagDialogMenu" label="&title;" insertbefore="tagMenu"
+            key="key_tagDialog" command="cmd_tagDialog"/>
 </menupopup>
 
 <keyset id="mailKeys">
-	<key id="key_tagDialog" key="I" command="cmd_tagDialog"/>
+  <key id="key_tagDialog" key="I" command="cmd_tagDialog"/>
 </keyset>
 
 <commandset id="mailToolbarItems">
-	<command id="cmd_tagDialog" accesskey="i"
-		oncommand="popupTagDialog();"/>
+  <command id="cmd_tagDialog" accesskey="i"
+           oncommand="popupTagDialog();"/>
 </commandset>
 
 </overlay>
+<!--
+vim: sw=2 ts=2 et:
+-->
