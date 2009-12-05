@@ -17,3 +17,6 @@
 <!ENTITY preference.new_tag.group.label "新規タグ">
 <!ENTITY preference.ask_newtag.label "新規タグ作成時に確認する">
 <!ENTITY preference.default_color.label "デフォルトのタグ文字色">
+<!ENTITY preference.ignored_tags.group.label "無視するタグ">
+<!ENTITY preference.ignored_tags.description1 "IMAPでサーバ上のメールに付けられたタグを取り込む際に、以下のタグは無視されます。">
+<!ENTITY preference.ignored_tags.description2 "無視するタグは改行区切りで複数指定できます。">

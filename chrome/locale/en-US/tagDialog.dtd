@@ -17,4 +17,6 @@
 <!ENTITY preference.new_tag.group.label "New tag">
 <!ENTITY preference.ask_newtag.label "Ask when creating new tag">
 <!ENTITY preference.default_color.label "Default color">
-
+<!ENTITY preference.ignored_tags.group.label "Tags should be ignored">
+<!ENTITY preference.ignored_tags.description1 "Following tags are not imported from messages on IMAP servers.">
+<!ENTITY preference.ignored_tags.description2 "You can specify multiple tags by lines.">

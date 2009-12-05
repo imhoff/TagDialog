@@ -3,3 +3,4 @@ pref('extensions.tagdialog.demiliter', ',');
 pref('extensions.tagdialog.case_insensitive', true);
 pref('extensions.tagdialog.ask_newtag', true);
 pref('extensions.tagdialog.default_color', '');
+pref('extensions.tagdialog.ignored_tags', 'nonjunk');

@@ -14,11 +14,12 @@
  *
  * The Initial Developer of the Original Code is
  * teramako <teramako@gmail.com>.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *   teramako <teramako@gmail.com>
+ *   SHIMODA Hiroshi <shimoda@clear-code.com / piro@p.club.ne.jp>
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -90,6 +91,7 @@ var tagDialog = {
 	 * default demiliter string of tags list
 	 */
 	demiliter : ',',
+	ignoredTags : null,
 	
 	/**
 	 * initialize method
@@ -109,6 +111,7 @@ var tagDialog = {
 		this.tagTextBox = document.getElementById('tagText');
 		this.nominatedTagBox = document.getElementById('nominatedTags');
 		this.buildTags();
+		this.ignoredTags = decodeURIComponent(escape(this.prefService.getCharPref('ignored_tags'))).split('\n');
 		if ( _tags ){
 			this.tagTextBox.value = '';
 			for ( var i=0; i<_tags.length; i++ ){
@@ -118,13 +121,23 @@ var tagDialog = {
 			var keys = initialTags.split(' ');
 			var tags = [];
 			for ( var i=0; i<keys.length; i++ ){
-				var tagName = this.tagService.getTagForKey(keys[i]);
+				var tagName;
+				try {
+					tagName = this.tagService.getTagForKey(keys[i]);
+				}
+				catch(e) {
+					// Undefined tags possibly appear on IMAP.
+					tagName = this.generateTagNameForKey(keys[i]);
+					if (this.ignoredTags.indexOf(tagName) > -1) continue;
+				}
 				if ( tagName ){
-  				document.getElementById('tag_'+keys[i]).checked = true;
+  				var checkbox = document.getElementById('tag_'+keys[i]);
+  				if (checkbox) checkbox.checked = true;
   				tags.push(tagName);
 				}
 			}
-			this.tagTextBox.value = tags.join(this.demiliter) + this.demiliter;
+			if (tags.length)
+				this.tagTextBox.value = tags.join(this.demiliter) + this.demiliter;
 		}
 		this.tagTextBox.addEventListener('input',function(){
 			if ( ! this.value ) return;
@@ -138,6 +151,11 @@ var tagDialog = {
 		this.tagListGroupBox.addEventListener('command',tagDialog.toggleCheck,true);
 		this.popup.init();
 		this.tagTextBox.focus();
+	},
+	generateTagNameForKey : function( _key ){
+		var converter = Cc['@mozilla.org/intl/scriptableunicodeconverter'].createInstance(Ci.nsIScriptableUnicodeConverter);
+		converter.charset = 'x-imap4-modified-utf7';
+		return converter.ConvertToUnicode(_key);
 	},
 	/**
 	 * called by input event

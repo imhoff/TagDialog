@@ -14,11 +14,12 @@
  *
  * The Initial Developer of the Original Code is
  * teramako <teramako@gmail.com>.
- * Portions created by the Initial Developer are Copyright (C) 2007
+ * Portions created by the Initial Developer are Copyright (C) 2007-2009
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
  *   teramako <teramako@gmail.com>
+ *   SHIMODA Hiroshi <shimoda@clear-code.com / piro@p.club.ne.jp>
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -56,7 +57,7 @@ function initializeTagDialog(){
 	tagDialogObserver.initialize();
 }
 function popupTagDialog(){
-	var gDBView = GetDBView();
+	var gDBView = window.gDBView || GetDBView();
 	var msgHdr = gDBView.hdrForFirstSelectedMessage;
 	var uri = getCurrentRootFolderURI();
 	var currentKeys = msgHdr.getStringProperty('keywords');
@@ -77,7 +78,7 @@ function popupTagDialog(){
 	}
 }
 function getCurrentRootFolderURI(){
-	var gDBView = GetDBView();
+	var gDBView = window.gDBView || GetDBView();
 	var uri = null;
 	try {
 		var rootFolder = gDBView.msgFolder.server.rootFolder;

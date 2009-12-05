@@ -10,6 +10,7 @@
 		  <preference id="extensions.tagdialog.case_insensitive" type="bool"   name="extensions.tagdialog.case_insensitive"/>
 		  <preference id="extensions.tagdialog.ask_newtag"       type="bool"   name="extensions.tagdialog.ask_newtag"/>
 		  <preference id="extensions.tagdialog.default_color"    type="string" name="extensions.tagdialog.default_color"/>
+		  <preference id="extensions.tagdialog.ignored_tags"     type="string" name="extensions.tagdialog.ignored_tags"/>
 		</preferences>
   	<vbox>
   	<groupbox>
@@ -27,6 +28,12 @@
         <colorpicker preference="extensions.tagdialog.default_color" type="button"/>
       </hbox>
     </groupbox>
+  	<groupbox flex="1">
+      	<caption label="&preference.ignored_tags.group.label;"/>
+      	<description value="&preference.ignored_tags.description1;"/>
+      	<description value="&preference.ignored_tags.description2;"/>
+      	<textbox preference="extensions.tagdialog.ignored_tags" multiline="true" rows="5"/>
+  	</groupbox>
     </vbox>
 	</prefpane>
 </prefwindow>
