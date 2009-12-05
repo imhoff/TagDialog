@@ -3,7 +3,7 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:name>Tag Dialog</em:name>
-    <em:version>1.0.3+</em:version>
+    <em:version>1.0.4</em:version>
     <em:description>Easily add or create tags.</em:description>
     <em:creator>teramako</em:creator>
     <em:contributor>SHIMODA Hiroshi</em:contributor>

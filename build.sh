@@ -2,7 +2,7 @@
 
 ZIP=zip
 JAR=tagDialog.jar
-VERSION=1.0.3
+VERSION=1.0.4
 
 # make jar
 (cd chrome; zip ${JAR} -r content locale skin;)
