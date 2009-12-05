@@ -1,0 +1,20 @@
+<!ENTITY title "Tag Dialog">
+<!ENTITY new_tag.title "New tag">
+<!ENTITY edit_tag.title "Edit tag">
+<!ENTITY nominated.label "Nominated">
+<!ENTITY taglist "Tag List">
+<!ENTITY tag.clear "Clear">
+<!ENTITY tag.clear.key "0">
+<!ENTITY popup.edit "Edit">
+<!ENTITY popup.copy "Copy">
+<!ENTITY popup.delete "Delete">
+<!ENTITY popup.filter.label "Filter">
+<!ENTITY popup.filter.new "New Filter">
+<!ENTITY popup.option "Option">
+<!ENTITY preference.title "Tag Dialog Option">
+<!ENTITY preference.demiliter.label "Demiliter of tags">
+<!ENTITY preference.case_insensitive.label "Case insensitive at tag matching">
+<!ENTITY preference.new_tag.group.label "New tag">
+<!ENTITY preference.ask_newtag.label "Ask when creating new tag">
+<!ENTITY preference.default_color.label "Default color">
+

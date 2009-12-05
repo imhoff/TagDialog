@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://tagdialog/locale/tagDialog.dtd">
+<prefwindow id="tagDialogPrefWindow"
+            title="&preference.title;"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<prefpane>
+		<preferences>
+		  <preference id="extensions.tagdialog.demiliter"        type="string" name="extensions.tagdialog.demiliter"/>
+		  <preference id="extensions.tagdialog.case_insensitive" type="bool"   name="extensions.tagdialog.case_insensitive"/>
+		  <preference id="extensions.tagdialog.ask_newtag"       type="bool"   name="extensions.tagdialog.ask_newtag"/>
+		  <preference id="extensions.tagdialog.default_color"    type="string" name="extensions.tagdialog.default_color"/>
+		</preferences>
+  	<vbox>
+  	<groupbox>
+    	<hbox flex="1">
+      	<label value="&preference.demiliter.label;"/>
+      	<textbox preference="extensions.tagdialog.demiliter"/>
+    	</hbox>
+  	  <checkbox preference="extensions.tagdialog.case_insensitive" label="&preference.case_insensitive.label;"/>
+  	</groupbox>
+    <groupbox>
+      <caption label="&preference.new_tag.group.label;"/>
+      <checkbox label="&preference.ask_newtag.label;" preference="extensions.tagdialog.ask_newtag"/>
+      <hbox flex="1">
+        <label value="&preference.default_color.label;"/>
+        <colorpicker preference="extensions.tagdialog.default_color" type="button"/>
+      </hbox>
+    </groupbox>
+    </vbox>
+	</prefpane>
+</prefwindow>

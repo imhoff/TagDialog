@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://tagdialog/locale/tagDialog.dtd">
+<overlay id="tagDialogOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+         
+<script type="application/x-javascript" src="chrome://tagdialog/content/tagDialogOverlay.js"/> 
+<menupopup id="messageMenuPopup">
+	<menuitem id="tagDialogMenu" label="&title;" insertbefore="tagMenu"
+		key="key_tagDialog" command="cmd_tagDialog"/>
+</menupopup>
+
+<keyset id="mailKeys">
+	<key id="key_tagDialog" key="I" command="cmd_tagDialog"/>
+</keyset>
+
+<commandset id="mailToolbarItems">
+	<command id="cmd_tagDialog" accesskey="i"
+		oncommand="popupTagDialog();"/>
+</commandset>
+
+</overlay>

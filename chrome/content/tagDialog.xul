@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+lisence MPL 1.1/GPL 2.0/LGPL 2.1
+
+
+-->
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://tagdialog/skin/tagDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/filterDialog.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderMenus.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderPane.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://tagdialog/locale/tagDialog.dtd">
+
+<dialog id="tagDialog"
+        title="&title;"
+        buttons="accept,cancel"
+        ondialogaccept="return tagDialog.commit();"
+        ondialogcancel="return tagDialog.cancel();"
+        onload="tagDialog.init();"
+        xmlns:nc="http://home.netscape.com/NC-rdf#"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="chrome://tagdialog/content/tagDialog.js"/>
+	<broadcasterset>
+	  <broadcaster id="onMouseCheckBox" disabled="true"/>
+	</broadcasterset>
+	<popupset>
+		<popup id="tagDialogPopup">
+			<menuitem label="&popup.edit;" accesskey="E" observes="onMouseCheckBox" oncommand="tagDialog.popup.tagEdit();"/>
+			<menuitem label="&popup.copy;" accesskey="C" observes="onMouseCheckBox" oncommand="tagDialog.popup.tagCopy();"/>
+			<menuitem label="&popup.delete;" accesskey="D" observes="onMouseCheckBox" oncommand="tagDialog.popup.tagDelete();"/>
+			<menuseparator id="menu_separateOptions"/>
+			<menu id="menu_filterList" label="&popup.filter.label;" accesskey="F"
+						datasources="rdf:msgfilters rdf:msgaccountmanager" flags="dont-build-content"
+						ref="">
+				<menupopup id="filterPopup">
+					<menuitem id="menu_createFilter"
+										label="&popup.filter.new;"
+										accesskey="N"
+										oncommand="tagDialog.popup.openFilterDialog(null, false);"/>
+					<menuitem id="menu_createFilterWithTemplate"
+										accesskey="E"
+										oncommand="tagDialog.popup.openFilterDialog(this, true);">
+						<observes element="onCheckBox" attribute="hidden"/>
+						<observes element="onCheckBox" attribute="label"/>
+					</menuitem>
+					<menuseparator id="menu_separateFilter"/>
+				</menupopup>
+				<template>
+					<rule>
+						<menupopup>
+							<menuitem uri="..."
+												label="rdf:http://home.netscape.com/NC-rdf#Name"
+												value="rdf:http://home.netscape.com/NC-rdf#Name"
+												oncommand="tagDialog.popup.openFilterDialog(this, false);"/>
+						</menupopup>
+					</rule>
+				</template>
+			</menu>
+			<menuitem label="&popup.option;" accesskey="O" oncommand="tagDialog.popup.showOption();"/>
+		</popup>
+	</popupset>
+	<vbox>
+  	<hbox flex="1">
+  		<vbox flex="1">
+    		<textbox id="tagText" flex="1"/>
+    		<hbox flex="1">
+    			<label value="&nominated.label;"/>
+    			<hbox id="nominatedTags" flex="1"></hbox>
+    		</hbox>
+  		</vbox>
+  		<button id="tagClear" label="&tag.clear;" accesskey="&tag.clear.key;" oncommand="tagDialog.allClear();"/>
+		</hbox>
+		<groupbox id="tagListGroup" contextmenu="tagDialogPopup">
+		  <caption label="&taglist;"/>
+  		<vbox id="tagList" flex="1"/>
+		</groupbox>
+	</vbox>
+</dialog>

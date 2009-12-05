@@ -1,0 +1,19 @@
+<!ENTITY title "Tag Dialog">
+<!ENTITY new_tag.title "新規タグ">
+<!ENTITY edit_tag.title "タグの編集">
+<!ENTITY nominated.label "候補">
+<!ENTITY taglist "タグ一覧">
+<!ENTITY tag.clear "クリア">
+<!ENTITY tag.clear.key "0">
+<!ENTITY popup.edit "編集">
+<!ENTITY popup.copy "コピー">
+<!ENTITY popup.delete "削除">
+<!ENTITY popup.filter.label "フィルター">
+<!ENTITY popup.filter.new "新規フィルター">
+<!ENTITY popup.option "設定">
+<!ENTITY preference.title "Tag Dialog オプション">
+<!ENTITY preference.demiliter.label "タグの区切り文字">
+<!ENTITY preference.case_insensitive.label "タグ入力時に大文字/小文字を区別しない">
+<!ENTITY preference.new_tag.group.label "新規タグ">
+<!ENTITY preference.ask_newtag.label "新規タグ作成時に確認する">
+<!ENTITY preference.default_color.label "デフォルトのタグ文字色">

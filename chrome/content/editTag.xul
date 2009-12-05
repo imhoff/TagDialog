@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/dialogs.css" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://tagdialog/locale/tagDialog.dtd">
+<dialog id="editTagDialog"
+        title="&new_tag.title;"
+        buttons="accept,cancel"
+        ondialogaccept="onOK();"
+        ondialogcancel="onCancel();"
+        onload="initialize();"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="bundle_messenger" src="chrome://messenger/locale/messenger.properties"/>
+  </stringbundleset>
+  <script src="chrome://tagdialog/content/editTag.js" type="application/x-javascript"/>
+  <hbox flex="1">
+    <textbox id="tagText"/>
+    <colorpicker class="small-margin" id="tagColor" type="button" palettename="standard"/>
+  </hbox></dialog>
