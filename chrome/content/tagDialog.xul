@@ -30,10 +30,8 @@ lisence MPL 1.1/GPL 2.0/LGPL 2.1
       <menuitem label="&popup.copy;" accesskey="C" observes="onMouseCheckBox" oncommand="tagDialog.popup.tagCopy();"/>
       <menuitem label="&popup.delete;" accesskey="D" observes="onMouseCheckBox" oncommand="tagDialog.popup.tagDelete();"/>
       <menuseparator id="menu_separateOptions"/>
-      <menu id="menu_filterList" label="&popup.filter.label;" accesskey="F"
-            datasources="rdf:msgfilters rdf:msgaccountmanager" flags="dont-build-content"
-            ref="">
-        <menupopup id="filterPopup">
+      <menu id="menu_filterList" label="&popup.filter.label;" accesskey="F">
+        <menupopup id="filterPopup" onpopupshowing="tagDialog.popup.generateFilterList()">
           <menuitem id="menu_createFilter"
                     label="&popup.filter.new;"
                     accesskey="N"
@@ -46,16 +44,6 @@ lisence MPL 1.1/GPL 2.0/LGPL 2.1
           </menuitem>
           <menuseparator id="menu_separateFilter"/>
         </menupopup>
-        <template>
-          <rule>
-            <menupopup>
-              <menuitem uri="..."
-                        label="rdf:http://home.netscape.com/NC-rdf#Name"
-                        value="rdf:http://home.netscape.com/NC-rdf#Name"
-                        oncommand="tagDialog.popup.openFilterDialog(this, false);"/>
-            </menupopup>
-          </rule>
-        </template>
       </menu>
       <menuitem label="&popup.option;" accesskey="O" oncommand="tagDialog.popup.showOption();"/>
     </popup>

@@ -66,7 +66,7 @@ function popupTagDialog(){
     var dialog = window.openDialog('chrome://tagdialog/content/tagDialog.xul',
                                    'TagDialog',
                                    'chrome,titlebar,modal,resizable,centerscreen',
-                                   currentKeys, result, uri);
+                                   currentKeys, result, uri, msgHdr);
     if ( result.status ){
         RemoveAllMessageTags();
         for ( var i=0; i<result.existingTags.length; i++ ){

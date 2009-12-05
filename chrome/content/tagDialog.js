@@ -48,12 +48,14 @@ var result = window.arguments[1];
 /** URI of current selected root folder */
 var folderURI = window.arguments[2];
 
+var hdrMsg = window.arguments[3];
+
 /**
  * dialog controller
  * @see chrome://tagdialog/content/tagDialog.xul
  */
 var tagDialog = {
-  prefService : Cc['@mozilla.org/preferences-service;1']
+    prefService : Cc['@mozilla.org/preferences-service;1']
                     .getService(Ci.nsIPrefService)
                     .getBranch("extensions.tagdialog."),
     /**
@@ -498,8 +500,8 @@ tagDialog.popup = {
      * target of oncontextmenu
      */
     target : null,
+    msgWindow: Cc["@mozilla.org/messenger/msgwindow;1"].createInstance(Ci.nsIMsgWindow),
     init : function(){
-        document.getElementById('menu_filterList').setAttribute('ref',folderURI);
         document.getElementById('tagListGroup').addEventListener('contextmenu',tagDialog.popup.show,true);
     },
     show : function( _evt ){
@@ -560,13 +562,12 @@ tagDialog.popup = {
      * @param {Boolean} templateFlag
      */
     openFilterDialog: function(aTarget, templateFlag){
-        var RDF = Cc['@mozilla.org/rdf/rdf-service;1'].getService(Ci.nsIRDFService);
-        var currentFilterList = RDF.GetResource(folderURI).GetDelegate('filter',Ci.nsIMsgFilterList);
+        var currentFilterList = hdrMsg.folder.getFilterList(this.msgWindow);
         /** daialog arguments */
         var args;
         var isNewFilter = false;
-        if (this.target && templateFlag){
-            var filterName = this.target.label;
+        if ((aTarget || this.target) && templateFlag){
+            var filterName = (aTarget || this.target).label;
             var msgFilter = getExistingFilter(filterName);
             if (! msgFilter){
                 msgFilter = currentFilterList.createFilter(filterName);
@@ -592,9 +593,6 @@ tagDialog.popup = {
                 isNewFilter = true;
             }
             args = { filter: msgFilter, filterList: currentFilterList };
-        } else if (aTarget){
-            var targetFilter = aTarget.resource.GetDelegate('filter',Ci.nsIMsgFilter);
-            args = { filter: targetFilter, filterList: currentFilterList };
         } else {
             args = { filterList: currentFilterList };
         }
@@ -624,6 +622,23 @@ tagDialog.popup = {
             }
             return false;
         }
+    },
+    generateFilterList: function(){
+        var popupElm = document.getElementById("filterPopup");
+        var sep = document.getElementById("menu_separateFilter");
+        while (sep.nextSibling){
+            popupElm.removeChild(sep.nextSibling);
+        }
+        var filterList = hdrMsg.folder.getFilterList(this.msgWindow);
+        for (var i=0, len=filterList.filterCount; i < len; i++){
+            var filter = filterList.getFilterAt(i);
+            var elm = createElement("menuitem", {
+                label: filter.filterName,
+                oncommand: "tagDialog.popup.openFilterDialog(this, true);"
+            });
+            popupElm.appendChild(elm);
+        }
+        return true;
     }
 }
 /**
