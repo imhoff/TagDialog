@@ -2,7 +2,7 @@
 
 ZIP=zip
 JAR=tagDialog.jar
-VERSION=1.0.4
+VERSION=1.0.5
 
 XPI=tagDialog-${VERSION}.xpi
 # make jar
