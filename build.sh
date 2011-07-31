@@ -1,28 +1,18 @@
 #!/bin/sh
 
-ZIP=zip
-JAR=tagDialog.jar
-VERSION=1.0.5
-
-XPI=tagDialog-${VERSION}.xpi
-# make jar
-if [ -f "chrome/${JAR}" ];then
-	rm chrome/${JAR}
-fi
-(cd chrome; zip ${JAR} -r content locale skin;)
-
-if [ -f ${XPI} ];then
-	rm ${XPI}
+if [ -z "$1" ];then
+  echo abort.
+  exit 1
 fi
 
-zip -1 ${XPI} \
-	chrome \
-	chrome/${JAR} \
-	chrome.manifest \
-	defaults \
-	defaults/preferences \
-	defaults/preferences/tagdialog.js \
-	install.rdf \
-	license.txt
+XPI=$1
 
+if [ -f $XPI ]; then
+  rm $XPI;
+fi
+
+zip $XPI -r chrome defaults install.rdf chrome.manifest license.txt
+
+echo ""
+echo "Created: ${XPI}"
 
