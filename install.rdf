@@ -3,7 +3,7 @@
 
   <Description about="urn:mozilla:install-manifest">
     <em:name>Tag Dialog</em:name>
-    <em:version>1.0.5</em:version>
+    <em:version>1.0.6</em:version>
     <em:description>Easily add or create tags.</em:description>
     <em:creator>teramako</em:creator>
     <em:contributor>SHIMODA Hiroshi</em:contributor>
@@ -13,8 +13,8 @@
       <!-- Thunderbird -->
       <Description>
         <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
-        <em:minVersion>2.0</em:minVersion>
-        <em:maxVersion>3.1.*</em:maxVersion>
+        <em:minVersion>5.0</em:minVersion>
+        <em:maxVersion>8.0a1</em:maxVersion>
       </Description>
     </em:targetApplication>
     
