@@ -156,6 +156,10 @@ var tagDialog = {
     },
     generateTagNameForKey : function( _key ){
         var converter = Cc['@mozilla.org/intl/scriptableunicodeconverter'].createInstance(Ci.nsIScriptableUnicodeConverter);
+        // see:
+        // Bug 601429 - (CVE-2010-3770) x-mac-arabic, x-mac-farsi and x-mac-hebrew are vulnerable to XSS
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=601429
+        converter.isIternal = true;
         converter.charset = 'x-imap4-modified-utf7';
         return converter.ConvertToUnicode(_key);
     },
