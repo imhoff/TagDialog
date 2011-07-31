@@ -35,7 +35,7 @@
  */
 
 /** Tag Dialog Version */
-const version = '1.0.4';
+const version = '1.0.5';
 /** alias Components.classes */
 const Cc = Components.classes;
 /** alias Components.interfaces */
