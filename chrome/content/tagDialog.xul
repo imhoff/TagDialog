@@ -20,7 +20,7 @@ lisence MPL 1.1/GPL 2.0/LGPL 2.1
         onload="tagDialog.init();"
         xmlns:nc="http://home.netscape.com/NC-rdf#"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/x-javascript" src="chrome://tagdialog/content/tagDialog.js"/>
+  <script type="application/javascript" src="chrome://tagdialog/content/tagDialog.js"/>
   <broadcasterset>
     <broadcaster id="onMouseCheckBox" disabled="true"/>
   </broadcasterset>

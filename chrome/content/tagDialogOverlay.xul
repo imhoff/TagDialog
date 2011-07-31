@@ -3,7 +3,7 @@
 <overlay id="tagDialogOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
          
-<script type="application/x-javascript" src="chrome://tagdialog/content/tagDialogOverlay.js"/> 
+<script type="application/javascript" src="chrome://tagdialog/content/tagDialogOverlay.js"/>
 <menupopup id="messageMenuPopup">
   <menuitem id="tagDialogMenu" label="&title;" insertbefore="tagMenu"
             key="key_tagDialog" command="cmd_tagDialog"/>
