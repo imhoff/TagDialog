@@ -1,5 +1,5 @@
-content tagdialog jar:chrome/tagDialog.jar!/content/
+content tagdialog chrome/content/
 overlay chrome://messenger/content/mailWindowOverlay.xul chrome://tagdialog/content/tagDialogOverlay.xul
-locale	tagdialog	en-US		jar:chrome/tagDialog.jar!/locale/en-US/
-locale	tagdialog	ja			jar:chrome/tagDialog.jar!/locale/ja/
-skin	tagdialog	classic/1.0	jar:chrome/tagDialog.jar!/skin/
+locale	tagdialog	en-US		chrome/locale/en-US/
+locale	tagdialog	ja			chrome/locale/ja/
+skin	tagdialog	classic/1.0	chrome/skin/
