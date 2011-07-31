@@ -34,61 +34,67 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-/**
- * tagDialogObserver
- */
-var tagDialogObserver = {
-    initialize : function(){
-        var observerService = Components.classes['@mozilla.org/observer-service;1']
-                                        .getService(Components.interfaces.nsIObserverService);
-        observerService.addObserver(tagDialogObserver,'mail:updateToolbarItems',false);
-        window.removeEventListener('load',initializeTagDialog,false);
-    },
-    observe: function( aSubject, aTopic, aData ){
-        try {
-            if ( gDBView.keyForFirstSelectedMessage != nsMsgKey_None ){
-                document.getElementById('cmd_tagDialog').removeAttribute('disabled');
+(function() {
+    const TAGDIALOG_CMD = "cmd_tagDialog";
+    const TAGDIALOG_CONTROLLER = {
+        supportsCommand: function (aCommand) {
+            return aCommand === TAGDIALOG_CMD;
+        },
+        isCommandEnabled: function (aCommand) {
+            if (aCommand === TAGDIALOG_CMD) {
+                return !!(gFolderDisplay.selectedMessage);
             }
-        } catch (e){}
-    }
-};
+            return false;
+        },
+        doCommand: function (aCommand) {
+            if (aCommand !== TAGDIALOG_CMD)
+                return;
 
-function initializeTagDialog(){
-    tagDialogObserver.initialize();
-}
-function popupTagDialog(){
-    var gDBView = window.gDBView || GetDBView();
-    var msgHdr = gDBView.hdrForFirstSelectedMessage;
-    var uri = getCurrentRootFolderURI();
-    var currentKeys = msgHdr.getStringProperty('keywords');
-    //if ( msgHdr.label ) currentKeys += ' $label' + msgHdr.label;
-    var result = { status: false, existingTags: [], newTagKeys: [] };
-    var dialog = window.openDialog('chrome://tagdialog/content/tagDialog.xul',
-                                   'TagDialog',
-                                   'chrome,titlebar,modal,resizable,centerscreen',
-                                   currentKeys, result, uri, msgHdr);
-    if ( result.status ){
-        RemoveAllMessageTags();
-        for ( var i=0; i<result.existingTags.length; i++ ){
-            ToggleMessageTag(result.existingTags[i].key, true);
-        }
-        for ( var i=0; i<result.newTagKeys.length; i++ ){
-            ToggleMessageTag(result.newTagKeys[i], true);
+            openTagDialog();
+        },
+        onEvent: function () {},
+    };
+
+    window.controllers.appendController(TAGDIALOG_CONTROLLER);
+
+    function openTagDialog () {
+        var gDBView = window.gDBView,
+            msgHdr = gDBView.hdrForFirstSelectedMessage,
+            uri = getCurrentRootFolderURI(),
+            currentKeys = null,
+            result = { status: false, existingTags: [], newTagKeys: [] };
+
+        if (!msgHdr)
+            return;
+
+        currentKeys = msgHdr.getStringProperty('keywords');
+        var dialog = window.openDialog('chrome://tagdialog/content/tagDialog.xul',
+                                       'TagDialog',
+                                       'chrome,titlebar,modal,resizable,centerscreen',
+                                       currentKeys, result, uri, msgHdr);
+        if ( result.status ){
+            RemoveAllMessageTags();
+            for (let i=0; i < result.existingTags.length; i++){
+                ToggleMessageTag(result.existingTags[i].key, true);
+            }
+            for (let i=0; i < result.newTagKeys.length; i++){
+                ToggleMessageTag(result.newTagKeys[i], true);
+            }
         }
     }
-}
-function getCurrentRootFolderURI(){
-    var gDBView = window.gDBView || GetDBView();
-    var uri = null;
-    try {
-        var rootFolder = gDBView.msgFolder.server.rootFolder;
-        if (rootFolder.isServer && rootFolder.server.canHaveFilters){
-            uri = (rootFolder.server.type == 'nntp') ? gDBView.msgFolder.URI : rootFolder.URI;
+    function getCurrentRootFolderURI () {
+        var gDBView = window.gDBView,
+            uri = null;
+        try {
+            var rootFolder = gDBView.msgFolder.server.rootFolder;
+            if (rootFolder.isServer && rootFolder.server.canHaveFilters){
+                uri = (rootFolder.server.type == 'nntp') ? gDBView.msgFolder.URI : rootFolder.URI;
+            }
+        } catch (ex){
+            Components.utils.reportError(ex);
         }
-    } catch (ex){
-        Components.utils.reportError(ex);
+        return uri;
     }
-    return uri;
-}
-window.addEventListener('load',initializeTagDialog,false);
+})();
+
 // vim: sw=4 ts=4 et:

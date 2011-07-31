@@ -15,7 +15,7 @@
 
 <commandset id="mailToolbarItems">
   <command id="cmd_tagDialog" accesskey="i"
-           oncommand="popupTagDialog();"/>
+           oncommand="goDoCommand('cmd_tagDialog');"/>
 </commandset>
 
 </overlay>
